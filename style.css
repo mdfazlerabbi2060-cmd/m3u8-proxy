@@ -1,0 +1,185 @@
+:root {
+    --primary-color: #3498db;
+    --bg-dark: #0f0f0f;
+    --control-bg: rgba(0, 0, 0, 0.7);
+    --text-color: #ffffff;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-dark);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+}
+
+/* Player Wrapper */
+.player-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Setup UI */
+.setup-overlay {
+    position: absolute;
+    z-index: 10;
+    background: var(--bg-dark);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+.setup-box {
+    background: #1a1a1a;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    width: 90%;
+    max-width: 500px;
+}
+
+.setup-box h1 { color: var(--text-color); margin-bottom: 1.5rem; }
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: white;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+}
+
+.setup-buttons { display: flex; gap: 10px; }
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+#load-btn {
+    flex: 2;
+    background: var(--primary-color);
+    color: white;
+    padding: 12px;
+}
+
+#copy-link-btn {
+    flex: 1;
+    background: #444;
+    color: white;
+}
+
+/* Player Logo */
+.player-logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    max-width: 120px;
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Custom Controls */
+.controls-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, var(--control-bg));
+    padding: 20px;
+    transition: opacity 0.4s ease;
+    z-index: 8;
+}
+
+.hidden { opacity: 0; pointer-events: none; }
+
+.control-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.control-group { display: flex; align-items: center; gap: 15px; }
+
+.icon-btn {
+    background: transparent;
+    color: white;
+    font-size: 1.2rem;
+}
+
+/* Seek Bar */
+.progress-container {
+    height: 5px;
+    background: rgba(255,255,255,0.2);
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.progress-filled {
+    height: 100%;
+    background: var(--primary-color);
+    width: 0%;
+    border-radius: 5px;
+}
+
+/* Volume Slider */
+.volume-container { display: flex; align-items: center; gap: 5px; }
+#volume-slider { width: 80px; cursor: pointer; }
+
+/* Speed Select */
+.speed-select {
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+/* Spinner */
+.spinner-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex; justify-content: center; align-items: center;
+    background: rgba(0,0,0,0.3);
+}
+
+.spinner {
+    width: 50px; height: 50px;
+    border: 5px solid rgba(255,255,255,0.1);
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* Error Styling */
+.error-msg { color: #ff4d4d; font-size: 0.9rem; margin-top: 10px; }
+
+/* Embed Mode logic: hide UI if container has special class */
+.embed-mode .setup-overlay { display: none; }
